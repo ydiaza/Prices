@@ -1,5 +1,6 @@
 # Prices
-Demo prices
+Demo prices 
+
 In the company's e-commerce database we have the PRICES table which contains the final price (PVP) and the rate to apply to one product of a brand between a given dates.
 
 ## Introduction
