@@ -23,9 +23,10 @@ H2 Database 2.1
 
 Maven 3.5.3 
 
-## Design patterns
+## Project explanation
+This repository tries to follow the Hexagonal Architecture pattern. It's structured using the next modules:
 
-Dependency injection
+![image](https://user-images.githubusercontent.com/32063255/212723233-65304050-85ef-4b33-9a95-75ed7fa4ce90.png)
 
 ## Release
 
