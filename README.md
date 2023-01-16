@@ -24,9 +24,13 @@ H2 Database 2.1
 Maven 3.5.3 
 
 ## Project explanation
-This repository tries to follow the Hexagonal Architecture pattern. It's structured using the next modules:
+This repository follows the Hexagonal Architecture pattern. The target is to isolate the domain layer, which holds the business logic, from the application and infrastructure layers. It's structured using the following layers:
 
-![image](https://user-images.githubusercontent.com/32063255/212723233-65304050-85ef-4b33-9a95-75ed7fa4ce90.png)
+![image](https://user-images.githubusercontent.com/32063255/212756862-a207f1dc-1aed-4f6a-a241-42cc6f088d93.png)
+
+Primary Adapter: API REST Controller
+
+Secondary Adapter: H2 Database Repository
 
 ## Release
 
