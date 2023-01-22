@@ -24,9 +24,9 @@ H2 Database 2.1
 Maven 3.5.3 
 
 ## Project explanation
-This repository follows the Hexagonal Architecture pattern. The target is to isolate the domain layer, which holds the business logic, from the application and infrastructure layers. It's structured using the following layers:
+This repository follows the Hexagonal Architecture pattern. The target is to isolate the domain layer, which holds the business logic, from the application and infrastructure layers. The 'src/main/java/com.inditex.ecommerce' package is structured using the following layers :
 
-![image](https://user-images.githubusercontent.com/32063255/212756862-a207f1dc-1aed-4f6a-a241-42cc6f088d93.png)
+![image](https://user-images.githubusercontent.com/32063255/213918492-c7c0c97c-fe33-4723-9f02-b2b648373f13.png)
 
 Primary Adapter: API REST Controller
 
