@@ -1,22 +1,31 @@
 package com.inditex.ecommerce.infrastructure.rest;
 
 
-import com.inditex.ecommerce.infrastructure.helpers.DateTimeConverter;
-import com.inditex.ecommerce.infrastructure.dto.PriceResponseDTO;
-import com.inditex.ecommerce.infrastructure.dto.PriceRequestDTO;
-import com.inditex.ecommerce.application.ports.input.PriceUseCase;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
+import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.*;
-import java.time.format.DateTimeParseException;
-import java.util.List;
+import org.springframework.util.CollectionUtils;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.inditex.ecommerce.application.ports.input.PriceUseCase;
+import com.inditex.ecommerce.domain.model.Price;
+import com.inditex.ecommerce.infrastructure.dto.PriceResponseDTO;
+import com.inditex.ecommerce.infrastructure.helpers.DateTimeConverter;
+
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 
 @RestController
 @RequestMapping("/api")
@@ -36,13 +45,14 @@ public class PriceController {
                                                             @ApiParam(value = "Fecha de consulta con formato yyyyy-MM-dd-HH.mm.ss", required = true) @RequestParam(name="date") String date) {
 
         try {
-            PriceRequestDTO priceRequestDTO = new PriceRequestDTO(productId, brandId, DateTimeConverter.dateConverterFromStringToLocalDateTime(date));
-            List<PriceResponseDTO> priceList = priceUseCase.findPrices(priceRequestDTO);
+            List<Price> prices = priceUseCase.findPrices(productId, brandId, DateTimeConverter.dateConverterFromStringToLocalDateTime(date));
 
-            if (priceList.isEmpty()) {
+            if (prices.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }
-            return new ResponseEntity<>(priceList, HttpStatus.OK);
+            
+            //mapper
+            return new ResponseEntity<>(toPriceResponseDTO(prices), HttpStatus.OK);
 
         }catch(DateTimeParseException dte ){
             logger.error(EXCEPTION,dte);
@@ -53,5 +63,12 @@ public class PriceController {
         }
     }
 
+    private List<PriceResponseDTO> toPriceResponseDTO(List<Price> prices){
+        if (CollectionUtils.isEmpty(prices)) {
+            return new ArrayList<>();
+        }
+        return prices.stream().map(price -> new PriceResponseDTO(price.getId(), price.getBrandId(), price.getStartDate(),
+                price.getEndDate(), price.getPriceList(), price.getPrice())).collect(Collectors.toList());
+    }
 
 }

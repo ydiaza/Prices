@@ -1,4 +1,4 @@
-package com.inditex.ecommerce.domain.entities;
+package com.inditex.ecommerce.infrastructure.output.entities;
 
 import org.springframework.lang.NonNull;
 

@@ -1,4 +1,4 @@
-package com.inditex.ecommerce.domain.entities;
+package com.inditex.ecommerce.infrastructure.output.entities;
 
 import javax.persistence.Column;
 import javax.persistence.Embeddable;
@@ -7,7 +7,11 @@ import java.util.Objects;
 
 @Embeddable
 public class PriceId implements Serializable {
-    @Column(name="PRODUCT_ID")
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = -2183148618245003297L;
+	@Column(name="PRODUCT_ID")
     private Integer id;
     @Column(name="PRICE_LIST")
     private Integer priceList;

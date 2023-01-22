@@ -1,10 +1,10 @@
 package com.inditex.ecommerce.application.ports.input;
 
-import com.inditex.ecommerce.infrastructure.dto.PriceRequestDTO;
-import com.inditex.ecommerce.infrastructure.dto.PriceResponseDTO;
-
+import java.time.LocalDateTime;
 import java.util.List;
 
+import com.inditex.ecommerce.domain.model.Price;
+
 public interface PriceUseCase {
-    List<PriceResponseDTO> findPrices(PriceRequestDTO priceRequestDTO);
+    List<Price> findPrices(Integer productId,Integer brandId,LocalDateTime date);
 }
